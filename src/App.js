@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import Result from './Result';
@@ -10,7 +10,7 @@ function App() {
 
     try {
       
-      const response = await axios.post('/member', {
+      const response = await axios.post('/website-info', {
         title: title
       });
       setresponsedata(response.data);
@@ -21,6 +21,13 @@ function App() {
       console.log('Error', error);
     }
   }
+  async function settodefault(){
+    const msg_for_default=await axios.get('/settodefault');
+    console.log(msg_for_default);
+  }
+  useEffect(()=>{
+    settodefault();
+  },[])
 
   return (
     <div>
