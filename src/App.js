@@ -13,8 +13,8 @@ function App() {
       const response = await axios.post('/member', {
         title: title
       });
-      setresponsedata([...responsedata,response.data]);
-      console.log(response);
+      setresponsedata(response.data);
+
     }
     catch(error)
     {
