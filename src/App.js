@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  const [title, setTitle] = useState('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      
+      const response = await axios.post('/member', {
+        title: title
+      });
+      console.log(response);
+    }
+    catch(error)
+    {
+      console.log('Error', error);
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div><h1>Webpage scrapper</h1></div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Term:</label>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   );
 }
