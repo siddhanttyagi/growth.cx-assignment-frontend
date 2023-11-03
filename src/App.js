@@ -41,7 +41,7 @@ function App() {
           <button type="submit">Submit</button>
         </form>
       </div>
-      <Result data={responsedata}/>
+      <Result data={responsedata} setresponsedata={setresponsedata}/>
     </div>
   );
 }

@@ -1,10 +1,25 @@
 import React from "react";
-
+import axios from "axios";
 const Result = (props) => {
   console.log("mai result hoon");
   console.log(props.data);
-  function handledelete(){
-    console.log("hi");
+  async function handledelete(index){
+    try {
+      // Make the DELETE request to your Flask server with the index as a parameter
+      const response = await axios.delete('/delete/' + index);
+      
+      // Check the response and handle it as needed
+      if (response.status === 200) {
+        // Successful delete
+        props.setresponsedata(response.data);
+        console.log('Item at index', index, 'deleted successfully');
+      } else {
+        console.error('Delete request failed');
+      }
+    } catch (error) {
+      console.error('Error during delete request:', error);
+    }
+    
   }
   
   return (
@@ -25,7 +40,7 @@ const Result = (props) => {
              {
                 props.data.map((item,index) =>
                 <tr key={index} style={{width:"20vw"}}>
-                    <th scope="row">{index}. {item.domain}</th>
+                    <th scope="row">{item.domain}</th>
                     <td>{item.word_count}</td>
                     <td>Otto</td>
                     
@@ -44,7 +59,7 @@ const Result = (props) => {
                       }
                     </td>
                     <td>
-                      <img src="./delete.png" alt="delete" height="30vh" onClick={handledelete} style={{ cursor: 'pointer' }}></img>
+                      <img src="./delete.png" alt="delete" height="30vh" onClick={() =>handledelete(index)} style={{ cursor: 'pointer' }}></img>
                     </td>
                     
                 </tr>
