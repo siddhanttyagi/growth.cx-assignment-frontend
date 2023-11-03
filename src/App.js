@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import './App.css';
 import axios from 'axios';
-
+import Result from './Result';
 function App() {
   const [title, setTitle] = useState('');
+  const [responsedata,setresponsedata]=useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -12,6 +13,7 @@ function App() {
       const response = await axios.post('/member', {
         title: title
       });
+      setresponsedata([...responsedata,response.data]);
       console.log(response);
     }
     catch(error)
@@ -32,6 +34,7 @@ function App() {
           <button type="submit">Submit</button>
         </form>
       </div>
+      <Result data={responsedata}/>
     </div>
   );
 }
