@@ -21,6 +21,19 @@ const Result = (props) => {
     }
     
   }
+  async function handlefav(index){
+    const response=await axios.put('/updatefav/'+ index);
+    if (response.status === 200) {
+      // Successful delete
+      props.setresponsedata(response.data);
+      console.log('Item at index', index, 'deleted successfully');
+    } else {
+      console.error('Delete request failed');
+    }
+  }
+  
+
+  
   
   return (
     <div>
@@ -42,7 +55,7 @@ const Result = (props) => {
                 <tr key={index} style={{width:"20vw"}}>
                     <th scope="row">{item.domain}</th>
                     <td>{item.word_count}</td>
-                    <td>Otto</td>
+                    <td><b>{item.favourite}</b></td>
                     
                     <td style={{width:"20vw"}} >
                       {
@@ -60,6 +73,9 @@ const Result = (props) => {
                     </td>
                     <td>
                       <img src="./delete.png" alt="delete" height="30vh" onClick={() =>handledelete(index)} style={{ cursor: 'pointer' }}></img>
+                      <hr></hr>
+                      {item.favourite=== "false" && <img src="./favorite.png" alt="open fav" height="30vh" onClick={() =>handlefav(index)} style={{ cursor: 'pointer' }}></img>}
+                      {item.favourite=== "true" && <img src="./gold_favorite.png" alt="fav" height="30vh" onClick={() =>handlefav(index)} style={{ cursor: 'pointer' }}></img>}
                     </td>
                     
                 </tr>
