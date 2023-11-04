@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import './Result.css'
 const Result = (props) => {
   console.log("mai result hoon");
   console.log(props.data);
@@ -36,38 +37,38 @@ const Result = (props) => {
   
   
   return (
-    <div>
-      <table className="table" style={{width:"70vw"}}>
+    <div className="wrappingup">
+      <table className="table second" >
         <thead>
-          <tr style={{width:"20vw"}}>
-            <th scope="col">Domain Name</th>
-            <th scope="col">Word Count</th>
-            <th scope="col">favourite</th>
-            <th scope="col">Web-Links</th>
-            <th scope="col">Media-Links</th>
-            <th scope="col">Actions</th>
+          <tr>
+            <th scope="col" className="sizing">Domain Name</th>
+            <th scope="col" className="sizing">Word Count</th>
+            <th scope="col" className="sizing">favourite</th>
+            <th scope="col" className="sizing">Web-Links</th>
+            <th scope="col"className="sizing">Media-Links</th>
+            <th scope="col" className="sizing">Actions</th>
           </tr>
         </thead>
         <tbody>
           
              {
                 props.data.map((item,index) =>
-                <tr key={index} style={{width:"20vw"}}>
-                    <th scope="row">{item.domain}</th>
+                <tr key={index}>
+                    <td style={{color:'red', maxWidth:"200px"}}><div style={{wordWrap:"break-word"}}><b>{item.domain}</b></div></td>
                     <td>{item.word_count}</td>
                     <td><b>{item.favourite}</b></td>
                     
-                    <td style={{width:"20vw"}} >
+                    <td style={{maxWidth:"200px"}}>
                       {
                         item.web_links.slice(0,5).map((weblink,indexlink)=>(
-                          <p key={indexlink}><b>{indexlink}</b>.{weblink}</p>
+                        <div style={{wordWrap:"break-word"}}> <p key={indexlink}><b>{indexlink}</b>.{weblink}</p></div>
                           ))
                       }
                     </td>
-                    <td style={{width:"0.2vw"}}>
+                    <td style={{maxWidth:'200px'}}>
                       {
                         item.media_links.slice(0,5).map((medialink,indexlink)=>(
-                          <p key={indexlink}><b>{indexlink}</b>.{medialink}</p>
+                        <div style={{wordWrap:"break-word"}}><p key={indexlink}><b>{indexlink}</b>.{medialink}</p></div>
                         ))
                       }
                     </td>

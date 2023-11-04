@@ -30,19 +30,21 @@ function App() {
   },[])
 
   return (
-    <div>
-      <div><h1>Webpage scrapper</h1></div>
+    <>
+    <div className='flexing'>
+      <div className='textify'>Webpage Scrapper</div>
       <div>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Term:</label>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter Website URL' className='down-margin' />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" className='btn btn-primary'>Get Insights</button>
         </form>
       </div>
-      <Result data={responsedata} setresponsedata={setresponsedata}/>
+      
     </div>
+    <Result data={responsedata} setresponsedata={setresponsedata}/>
+    </>
   );
 }
 
